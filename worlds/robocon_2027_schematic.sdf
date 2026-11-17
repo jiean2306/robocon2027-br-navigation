@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="robocon_2027_schematic">
+    <gravity>0 0 -9.81</gravity>
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 12 0 0 0</pose>
+      <direction>-0.5 0.2 -0.8</direction>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+    </light>
+
+    <!-- Ground field: 11 m x 11 m per Appendix 3.1 -->
+    <model name="ground_field">
+      <static>true</static>
+      <pose>0 0 -0.05 0 0 0</pose>
+      <link name="ground">
+        <collision name="collision"><geometry><box><size>11 11 0.1</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>11 11 0.1</size></box></geometry>
+          <material><ambient>0.25 0.25 0.27 1</ambient><diffuse>0.35 0.35 0.37 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- L1: 6 m x 6 m, top surface at z=0.600 m -->
+    <model name="level_1">
+      <static>true</static>
+      <pose>0 0 0.55 0 0 0</pose>
+      <link name="platform">
+        <collision name="collision"><geometry><box><size>6 6 0.1</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>6 6 0.1</size></box></geometry>
+          <material><ambient>0.18 0.32 0.18 1</ambient><diffuse>0.25 0.45 0.25 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- L2: 3 m x 3 m, top surface at z=0.900 m.
+         Position is schematic until team-side orientation is fixed. -->
+    <model name="level_2">
+      <static>true</static>
+      <pose>0 0 0.85 0 0 0</pose>
+      <link name="platform">
+        <collision name="collision"><geometry><box><size>3 3 0.1</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>3 3 0.1</size></box></geometry>
+          <material><ambient>0.20 0.22 0.42 1</ambient><diffuse>0.28 0.30 0.60 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Illustrative ramp from ground to L1. It is a visual/physics approximation;
+         align and shape it from the official field drawing before validation. -->
+    <model name="ramp_schematic">
+      <static>true</static>
+      <pose>0 -4.65 0.30 0.1745 0 0</pose>
+      <link name="ramp">
+        <collision name="collision"><geometry><box><size>1.0 3.5 0.08</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>1.0 3.5 0.08</size></box></geometry>
+          <material><ambient>0.5 0.35 0.15 1</ambient><diffuse>0.7 0.5 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Central Pillar on L2: 270 mm diameter, 800 mm tall.
+         Its top is intentionally shown as a simple cylinder in this schematic. -->
+    <model name="central_pillar">
+      <static>true</static>
+      <pose>0 0 1.35 0 0 0</pose>
+      <link name="pillar">
+        <collision name="collision"><geometry><cylinder><radius>0.135</radius><length>0.8</length></cylinder></geometry></collision>
+        <visual name="visual"><geometry><cylinder><radius>0.135</radius><length>0.8</length></cylinder></geometry>
+          <material><ambient>0.7 0.7 0.72 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

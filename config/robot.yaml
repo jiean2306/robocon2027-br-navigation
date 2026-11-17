@@ -1,0 +1,13 @@
+# PROVISIONAL values only. Replace after the mechanical design is frozen.
+br_geometry:
+  ros__parameters:
+    chassis_length_m: 0.55
+    chassis_width_m: 0.55
+    chassis_height_m: 0.18
+    wheel_radius_m: 0.075
+    wheelbase_m: 0.40
+    track_width_m: 0.40
+    max_linear_speed_mps: 0.60
+    max_angular_speed_radps: 1.20
+    # Convention: x forward, y left, z CCW.
+    # Confirm each motor's polarity and roller handedness physically.
