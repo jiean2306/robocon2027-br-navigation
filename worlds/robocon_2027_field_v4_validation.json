@@ -1,0 +1,81 @@
+{
+  "input": "/mnt/data/robocon_2027_field_v2.sdf",
+  "output": "/mnt/data/robocon_2027_field_v4_complete.sdf",
+  "layout": {
+    "ground_shared_center_m": [
+      0.0,
+      -4.25
+    ],
+    "mustika_area_center_m": [
+      0.0,
+      4.25
+    ],
+    "storage_area_centres_m": {
+      "red": [
+        -4.45,
+        4.95
+      ],
+      "blue": [
+        4.45,
+        4.95
+      ]
+    },
+    "start_retry_centres_m": {
+      "red": [
+        [
+          -5.1,
+          -5.1
+        ],
+        [
+          -4.3,
+          -5.1
+        ]
+      ],
+      "blue": [
+        [
+          4.3,
+          -5.1
+        ],
+        [
+          5.1,
+          -5.1
+        ]
+      ]
+    },
+    "divider_segments_y_m": [
+      [
+        -5.45,
+        -4.85
+      ],
+      [
+        -3.65,
+        3.65
+      ],
+      [
+        4.75,
+        5.45
+      ]
+    ]
+  },
+  "model_count": 89,
+  "earth_blocks": 40,
+  "sky_blocks": 12,
+  "mustika_ball_count": 1,
+  "errors": [],
+  "warnings": [
+    "Earth Block initial stacking order is not prescribed by the Appendix; V4 uses two layers of 10 inside each storage pad. Confirm with the event's initial setup if specified separately.",
+    "Mustika receptacle is approximated with 12 rim segments; verify exact concave cap profile against physical build.",
+    "The center-divider segment lengths are a geometric interpretation of Appendix Figure 3.9; verify against the full dimension chain before treating as fabrication dimensions.",
+    "Mustika ball appearance is a yellow visual approximation; Rulebook requires an original-condition Mikasa V300W and gives no RGB code.",
+    "Ramp/stair geometry is retained from V2; its slope and transition geometry should be checked against Appendix Figures 3.7\u20133.8.",
+    "L1/L2 spot positions and transfer-area positions are retained from V2 or reconstructed from the existing coordinate layout; visually verify against Appendix Figure 3.1."
+  ],
+  "checks": {
+    "xml_parse": "PASS",
+    "unique_top_level_model_names": "PASS",
+    "earth_block_count": "PASS",
+    "sky_block_count": "PASS",
+    "all_blocks_inside_11m_field": "PASS",
+    "required_ground_features": "PASS"
+  }
+}
