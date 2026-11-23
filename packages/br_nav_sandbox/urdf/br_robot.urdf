@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<robot name="br_robot">
+
+  <material name="br_silver_alloy">
+    <color rgba="0.78 0.80 0.84 1.0"/>
+  </material>
+  <material name="br_cyan">
+    <color rgba="0.10 0.78 0.96 1.0"/>
+  </material>
+
+  <!-- Base link: Exact Fusion 360 BR v7 CAD Mesh (702.5 x 696.5 x 696.0 mm) -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://br_nav_sandbox/meshes/br_robot_v7.stl" scale="1.0 1.0 1.0"/>
+      </geometry>
+      <material name="br_silver_alloy"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.348" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.7025 0.6965 0.6960"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.26" rpy="0 0 0"/>
+      <mass value="22.5"/>
+      <inertia ixx="1.15" ixy="0.0" ixz="0.0" iyy="1.15" iyz="0.0" izz="1.82"/>
+    </inertial>
+  </link>
+
+  <!-- 2D LiDAR sensor link mounted on the BR v7 deck -->
+  <link name="lidar_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.042" length="0.045"/>
+      </geometry>
+      <material name="br_cyan"/>
+    </visual>
+  </link>
+
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+    <origin xyz="0.0 0.0 0.25" rpy="0 0 0"/>
+  </joint>
+
+</robot>

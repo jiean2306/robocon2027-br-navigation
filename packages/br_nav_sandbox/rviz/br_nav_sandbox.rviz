@@ -1,0 +1,260 @@
+Panels:
+  - Class: rviz_common/Displays
+    Help Height: 78
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /BR Occupancy Grid1
+        - /BR Traversability Costmap1
+        - /BR Planned Path (A*)1
+      Splitter Ratio: 0.5
+    Tree Height: 700
+  - Class: rviz_common/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.4
+      Cell Size: 1.0
+      Class: rviz_default_plugins/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Name: Arena Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0.6
+      Plane: XY
+      Plane Cell Count: 12
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+      Marker Scale: 0.5
+      Name: TF Tree (map->odom->base_link->lidar_link)
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Update Interval: 0
+      Value: true
+    - Alpha: 0.9
+      Class: rviz_default_plugins/RobotModel
+      Collision Enabled: false
+      Description File: ""
+      Description Source: Topic
+      Description Topic:
+        Depth: 5
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /robot_description
+      Enabled: true
+      Links:
+        All Links Enabled: true
+      Name: BR Robot Model
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 0.85
+      Color Scheme: map
+      Class: rviz_default_plugins/Map
+      Draw Behind: true
+      Enabled: true
+      Name: BR Occupancy Grid
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /br_occupancy_grid
+      Update Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /br_occupancy_grid_updates
+      Use Timestamp: false
+      Value: true
+    - Alpha: 0.65
+      Color Scheme: costmap
+      Class: rviz_default_plugins/Map
+      Draw Behind: false
+      Enabled: true
+      Name: BR Traversability Costmap
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /br_traversability_costmap
+      Update Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /br_traversability_costmap_updates
+      Use Timestamp: false
+      Value: true
+    - Alpha: 1.0
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/LaserScan
+      Color: 0; 255; 255
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Min Color: 0; 0; 0
+      Name: 2D LiDAR Scan (/scan)
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 4
+      Size (m): 0.04
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /scan
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Alpha: 1.0
+      Class: rviz_default_plugins/Polygon
+      Color: 25; 255; 80
+      Enabled: true
+      Name: BR Footprint (0.70m x 0.70m)
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /br_footprint_polygon
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: A* Explored Nodes (/br_explored_nodes)
+      Namespaces:
+        astar_endpoints: true
+        astar_explored_cells: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /br_explored_nodes
+      Value: true
+    - Alpha: 1.0
+      Buffer Length: 1
+      Class: rviz_default_plugins/Path
+      Color: 0; 255; 128
+      Enabled: true
+      Head Diameter: 0.12
+      Head Length: 0.08
+      Length: 0.15
+      Line Style: Billboards
+      Line Width: 0.05
+      Name: BR Planned Path (A*)
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0.03
+      Pose Color: 255; 85; 255
+      Pose Style: Arrows
+      Radius: 0.03
+      Shaft Diameter: 0.04
+      Shaft Length: 0.07
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /br_planned_path
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 35; 38; 45
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+      Hide Inactive Objects: true
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+      Line color: 128; 128; 0
+    - Class: rviz_default_plugins/SetInitialPose
+      Covariance x: 0.25
+      Covariance y: 0.25
+      Covariance yaw: 0.0685
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /initialpose
+    - Class: rviz_default_plugins/SetGoal
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /goal_pose
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/TopDownOrtho
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.06
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.01
+      Scale: 95
+      Target Frame: <Fixed Frame>
+      Value: TopDownOrtho (rviz_default_plugins)
+      X: -0.5
+      Y: 0.0
+      Angle: 0
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 960
+  Hide Left Dock: false
+  Hide Right Dock: false
+  Width: 1440
+  X: 60
+  Y: 60
