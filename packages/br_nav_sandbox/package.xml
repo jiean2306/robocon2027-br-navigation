@@ -4,9 +4,11 @@
   <name>br_nav_sandbox</name>
   <version>0.1.0</version>
   <description>
-    ABU Robocon 2027 Builder Robot (BR) Level 1 autonomous navigation sandbox:
-    Log-odds LiDAR occupancy grid mapping, footprint-inflated traversability costmap,
-    and cost-aware A* pathfinding for ROS 2 Jazzy and Gazebo Harmonic.
+    ABU Robocon 2027 Builder Robot (BR) multi-level (Ground / L1 / L2) autonomous
+    navigation sandbox: Rulebook V1.1 146-primitive arena, Fusion 360 BR v7 CAD,
+    3-floor Bayesian LiDAR occupancy mapper, vectorized EDT traversability costmap
+    with Gazebo/RViz2 halo overlays, cost-aware A* pathfinder, 3-stage wheel-lift
+    climber, and full match gameplay director for ROS 2 Jazzy and Gazebo Harmonic.
   </description>
   <maintainer email="team@aburobocon2027.local">ABU Robocon 2027 BR Team</maintainer>
   <license>Apache-2.0</license>
@@ -26,6 +28,9 @@
   <exec_depend>rviz2</exec_depend>
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_ros</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-scipy</exec_depend>
+  <exec_depend>python3-tk</exec_depend>
 
   <test_depend>python3-pytest</test_depend>
 
