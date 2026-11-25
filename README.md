@@ -1,21 +1,21 @@
 # ABU Robocon 2027 — Builder Robot (BR) Autonomous Navigation & Simulation Workspace
 
-ROS 2 **Jazzy** + Gazebo **Harmonic** (`gz sim 8.x`) multi-package simulation, LiDAR mapping, traversability costmap, A\* pathfinding, and full Rulebook V1.1 match gameplay workspace for **ABU Robocon 2027: *"The Pursuit of Mustika Nusantara"* **.
+ROS 2 **Jazzy** + Gazebo **Harmonic** (`gz sim 8.x`) multi-package simulation, LiDAR mapping, traversability costmap, A\* pathfinding, and full Rulebook V1.1 match gameplay workspace for **ABU Robocon 2027 ("The Pursuit of Mustika Nusantara")**.
 
-> **Active Development Branch:** `feature/br-nav-sandbox`  
-> Make sure you clone or check out **`feature/br-nav-sandbox`** (not `main`, which only holds the early initial commit).
+> **Active Branch:** `feature/br-nav-sandbox`  
+> Clone or check out **`feature/br-nav-sandbox`** (rather than `main`, which contains only the early initial commit).
 
 ---
 
 ## 1. Key Features
 
-- **Exact Rulebook V1.1 & Appendix V1.1 Arena (146 3D Primitives):** Full `11 m × 11 m` Ground Area, `6 m × 6 m` Level 1 (`+0.60 m`), `3 m × 3 m` Level 2 (`+0.90 m`), `3.5 m` Ramps, Stairs, Transfer Areas, Building Spots, 40 Earth Blocks, Mustika Pillar + Mustika Ball, Central Pillar, and all **12 pixel-verified Figure 4 Sky Blocks**.
-- **Fusion 360 BR v7 CAD Mesh (`0.7025 × 0.6965 × 0.6960 m`):** Cleaned and scaled in `packages/br_nav_sandbox/meshes/br_robot_v7.stl` with portable relative Gazebo URIs (`../meshes/br_robot_v7.stl`).
+- **Exact Rulebook V1.1 & Appendix V1.1 Arena (146 3D Primitives):** Full `11 m × 11 m` Ground Area, `6 m × 6 m` Level 1 (`+0.60 m`), `3 m × 3 m` Level 2 (`+0.90 m`), `3.5 m` Ramps, Stairs, Transfer Areas, Building Spots, 40 Earth Blocks, Mustika Pillar + Mustika Ball, Central Pillar, and 12 Figure 4 Sky Blocks.
+- **Fusion 360 BR v7 CAD Mesh (`0.7025 × 0.6965 × 0.6960 m`):** Scaled STL mesh in `packages/br_nav_sandbox/meshes/br_robot_v7.stl` with portable relative Gazebo URIs (`../meshes/br_robot_v7.stl`).
 - **3-Floor Isolated LiDAR Occupancy Mapping & Dynamic Diff:** Bayesian log-odds + Bresenham raycasting across independent `ground`, `level_1`, and `level_2` grids (`0.05 m/cell`, `228 × 228`), plus Static-vs-Dynamic obstacle isolation (`/br_dynamic_obstacles`).
 - **Vectorized EDT Traversability Costmap (`~3–6 ms`):** Enforces Rulebook boundaries, cliffs, opponent-side restrictions, and `r_inscribed = 0.35 m` + exponential decay halo (`0.80 m`), rendered as a clean non-obscuring overlay in **both RViz2 (`/br_traversability_viz`) and Gazebo Sim (`/marker_array`)**.
-- **Cost-Aware A\* + Line-of-Sight Smoothing + Standoff Projection:** Auto-snaps Building Spot goals next to barriers to collision-free chassis poses, dynamically replans around moving robots (`OUR TR`, `ENEMY BR`, `ENEMY TR`), and pairs with a decoupled holonomic mecanum follower + directional forward-cone LiDAR safety shield.
-- **3-Stage Wheel-Lift Step Climber:** Simulates climbing `Ground ↔ Level 1 (+0.60 m) ↔ Level 2 (+0.90 m)` and syncs pose directly into Gazebo Sim.
-- **Full End-to-End Match Gameplay Demo:** Orchestrates BR + TR logistics (strictly Ground + Ramp + Transfer for TR), Tower #1 (Red L1) + Tower #2 (L1 Shared) → unlocks **Sanctuary Mandate** → **Direct Mustika Handover** → Level 2 Climb → **Central Pillar Enshrinement (`420 pts`)**.
+- **Cost-Aware A\* + Line-of-Sight Smoothing + Standoff Projection:** Automatically projects Building Spot goals next to barriers to collision-free chassis poses, replans around moving robots (`OUR TR`, `ENEMY BR`, `ENEMY TR`), and pairs with a decoupled holonomic mecanum follower and directional forward-cone LiDAR safety shield.
+- **3-Stage Wheel-Lift Step Climber:** Simulates climbing `Ground ↔ Level 1 (+0.60 m) ↔ Level 2 (+0.90 m)` with synchronized Gazebo pose updates.
+- **Full End-to-End Match Gameplay Demo:** Simulates BR + TR logistics (TR restricted to Ground + Ramp + Transfer), Tower #1 (Red L1) + Tower #2 (L1 Shared) → Sanctuary Mandate → Direct Mustika Handover → Level 2 Climb → Central Pillar Enshrinement (`420 pts`).
 
 ---
 
@@ -23,17 +23,17 @@ ROS 2 **Jazzy** + Gazebo **Harmonic** (`gz sim 8.x`) multi-package simulation, L
 
 ```text
 robocon2027-br-navigation/
-├── README.md                              # Team onboarding, install & run guide (this file)
+├── README.md                              # Project overview, setup, and usage guide
 ├── docs/
 │   ├── architecture.md                    # High-level interfaces & staged integration plan
 │   └── field_dimensions.md                # Reference field measurements
 └── packages/
-    ├── br_nav_sandbox/                    # ACTIVE full simulation & navigation stack
-    │   ├── SOFTWARE_TEAM_PLAYBOOK.md      # Rulebook V1.1 audit + What Can/Should/How To guide
-    │   ├── LEARNING_NOTES.md              # Design notes on wheel-lift climbing, A*, and costmaps
+    ├── br_nav_sandbox/                    # Main multi-level simulation & navigation stack
+    │   ├── SOFTWARE_TEAM_PLAYBOOK.md      # Rulebook constraints, architecture & deployment guide
+    │   ├── LEARNING_NOTES.md              # Mathematical derivations (kinematics, Bayes, EDT, A*)
     │   ├── package.xml & setup.py         # ROS 2 ament_python package manifest & entry points
     │   ├── config/
-    │   │   ├── br_nav_sandbox_params.yaml # All tunable LiDAR, costmap, A* & robot parameters
+    │   │   ├── br_nav_sandbox_params.yaml # Tunable LiDAR, costmap, A* & robot parameters
     │   │   └── ros_gz_bridge.yaml         # ROS 2 <-> Gazebo Harmonic topic bridge config
     │   ├── launch/
     │   │   └── br_nav_sandbox.launch.py   # Main unified launcher
@@ -41,12 +41,12 @@ robocon2027-br-navigation/
     │   │   ├── arena_geometry.py          # Single-source-of-truth 146 arena primitives & SDF builder
     │   │   ├── l1_sim_bridge.py           # Mecanum kinematics, wheel-lift climber, TF, 2D LiDAR & match robots
     │   │   ├── occupancy_mapper.py        # 3-floor Bayesian log-odds mapper + dynamic obstacle diff
-    │   │   ├── traversability_costmap.py  # Vectorized SciPy EDT costmap + clean /br_traversability_viz
+    │   │   ├── traversability_costmap.py  # Vectorized SciPy EDT costmap + /br_traversability_viz
     │   │   ├── astar_pathfinder.py        # Cost-aware 8-connected A*, LOS smoothing & standoff projection
-    │   │   ├── match_scenario_director.py # Full 31-step Rulebook V1.1 match demo director
+    │   │   ├── match_scenario_director.py # Rulebook V1.1 full match gameplay state machine
     │   │   ├── gz_overlay_bridge.py       # Streams traversability, A*, dynamic obstacles & towers into Gazebo
     │   │   ├── teleop_gui.py              # Compact Tkinter Joystick + WASD/Arrows + Match Demo GUI
-    │   │   └── teleop_keyboard.py         # Lightweight terminal keyboard teleop alternative
+    │   │   └── teleop_keyboard.py         # Terminal keyboard teleop alternative
     │   ├── meshes/br_robot_v7.stl         # Fusion 360 BR v7 CAD mesh (meters)
     │   ├── urdf/br_robot.urdf             # Robot URDF (base_link -> lidar_link)
     │   ├── worlds/robocon_2027_l1_sandbox.sdf # Complete Gazebo Harmonic world
@@ -55,7 +55,7 @@ robocon2027-br-navigation/
     │   │   ├── br_simulation_view.rviz    # Optional separate 3D Simulation view (dual_views:=true)
     │   │   └── br_lidar_mapping_view.rviz # Optional separate 2D Mapping view (dual_views:=true)
     │   └── test/                          # Automated pytest verification suite (26 tests)
-    └── br_nav_sim/                        # Preserved initial starter package (2 tests)
+    └── br_nav_sim/                        # Initial starter package (2 tests)
 ```
 
 ---
@@ -114,7 +114,7 @@ pytest -v src/robocon2027-br-navigation/packages/br_nav_sandbox/test src/robocon
 
 > Press **`Ctrl + C`** in the launch terminal to stop a running session before launching another mode.
 
-1. **Fast 2-Window Match Demo (Recommended for rapid algorithm/navigation testing — Unified 2D+3D RViz + Controller, no Gazebo overhead):**
+1. **2-Window Match Demo (Unified 2D+3D RViz + Controller, lightweight):**
    ```bash
    cd ~/robocon_ws
    source /opt/ros/jazzy/setup.bash
